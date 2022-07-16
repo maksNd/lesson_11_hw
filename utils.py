@@ -8,15 +8,15 @@ def load_candidates(json_filepath: str = JSON_FILE) -> list[dict]:
         return json.load(file)
 
 
-def get_candidate_by_id(candidate_id) -> dict:
-    """Return candidate by id"""
+def get_candidate_by_id(candidate_id) -> dict | None:
+    """Return candidate by id or None if not found"""
     list_with_candidates = load_candidates()
     for candidate in list_with_candidates:
         if candidate_id == candidate['id']:
             return candidate
 
 
-def get_candidates_by_quality(quality: str, field_to_find: str) -> list[dict]:
+def get_candidates_by_quality(quality: str, field_to_find: str) -> list[dict] | None:
     """
     Return candidate by some quality.
     For example quality could be the name or the skill of the candidate.
@@ -26,4 +26,7 @@ def get_candidates_by_quality(quality: str, field_to_find: str) -> list[dict]:
     for candidate in list_with_candidates:
         if quality.lower().strip() in candidate[field_to_find].lower():
             list_with_wanted_candidates.append(candidate)
-    return list_with_wanted_candidates
+    if len(list_with_wanted_candidates) > 0:
+        return list_with_wanted_candidates
+    else:
+        return None

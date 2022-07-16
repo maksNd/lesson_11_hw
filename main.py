@@ -18,17 +18,23 @@ def show_candidate_by_pk(x):
 
 @app.route('/search/<candidate_name>')
 def show_candidate_by_name(candidate_name):
-    candidates = get_candidates_by_quality(candidate_name, 'name')
-    candidates_count = len(candidates)
-    return render_template('by_name.html', candidates_count=candidates_count, candidates=candidates)
+    candidates_by_name = get_candidates_by_quality(candidate_name, 'name')
+    if candidates_by_name:
+        candidates_count = len(candidates_by_name)
+        return render_template('by_name.html', candidates_count=candidates_count, candidates=candidates_by_name)
+    else:
+        return render_template('if_name_not_found.html', candidate_name=candidate_name)
 
 
 @app.route('/skill/<skill_name>')
 def show_candidate_with_skill(skill_name):
-    candidates = get_candidates_by_quality(skill_name, 'skills')
-    candidates_count = len(candidates)
-    return render_template('skill.html', candidates=candidates, skill_name=skill_name,
-                           candidates_count=candidates_count)
+    candidates_by_skill = get_candidates_by_quality(skill_name, 'skills')
+    if candidates_by_skill:
+        candidates_count = len(candidates_by_skill)
+        return render_template('skill.html', candidates=candidates_by_skill, skill_name=skill_name,
+                               candidates_count=candidates_count)
+    else:
+        return render_template('if_skill_not_found.html', skill_name=skill_name)
 
 
 if __name__ == "__main__":
