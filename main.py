@@ -10,10 +10,10 @@ def show_all_candidates():
     return render_template('list.html', candidates=candidates)
 
 
-@app.route('/candidate/<int:x>')
-def show_candidate_by_pk(x):
-    candidate = get_candidate_by_id(x)
-    return render_template('by_id.html', candidate=candidate)
+@app.route('/candidate/<int:pk>')
+def show_candidate_by_pk(pk):
+    candidate = get_candidate_by_id(pk)
+    return render_template('by_pk.html', candidate=candidate)
 
 
 @app.route('/search/<candidate_name>')
@@ -22,7 +22,7 @@ def show_candidate_by_name(candidate_name):
     if candidates_by_name:
         candidates_count = len(candidates_by_name)
         return render_template('by_name.html', candidates_count=candidates_count, candidates=candidates_by_name)
-    else:
+    else:  # if candidates with this name are not found
         return render_template('if_name_not_found.html', candidate_name=candidate_name)
 
 
@@ -33,7 +33,7 @@ def show_candidate_with_skill(skill_name):
         candidates_count = len(candidates_by_skill)
         return render_template('skill.html', candidates=candidates_by_skill, skill_name=skill_name,
                                candidates_count=candidates_count)
-    else:
+    else:  # if candidates with this skill are not found
         return render_template('if_skill_not_found.html', skill_name=skill_name)
 
 
