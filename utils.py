@@ -8,7 +8,7 @@ def load_candidates(json_filepath: str = JSON_FILE) -> list[dict]:
         return json.load(file)
 
 
-def get_candidate_by_id(candidate_id):
+def get_candidate_by_id(candidate_id) -> dict:
     """Return candidate by id"""
     list_with_candidates = load_candidates()
     for candidate in list_with_candidates:

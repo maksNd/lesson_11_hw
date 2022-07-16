@@ -3,12 +3,10 @@ from utils import load_candidates, get_candidate_by_id, get_candidates_by_name, 
 
 app = Flask(__name__)
 
-list_with_all_candidates = load_candidates()
-
 
 @app.route('/')
 def show_all_candidates():
-    candidates = list_with_all_candidates
+    candidates = load_candidates()
     return render_template('list.html', candidates=candidates)
 
 
