@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from utils import load_candidates, get_candidate_by_id, get_candidates_by_name, get_candidates_by_skill
+from utils import load_candidates, get_candidate_by_id, get_candidates_by_quality
 
 app = Flask(__name__)
 
@@ -18,17 +18,18 @@ def show_candidate_by_pk(x):
 
 @app.route('/search/<candidate_name>')
 def show_candidate_by_name(candidate_name):
-    candidates = get_candidates_by_name(candidate_name)
+    candidates = get_candidates_by_quality(candidate_name, 'name')
     candidates_count = len(candidates)
     return render_template('by_name.html', candidates_count=candidates_count, candidates=candidates)
 
 
 @app.route('/skill/<skill_name>')
 def show_candidate_with_skill(skill_name):
-    candidates = get_candidates_by_skill(skill_name)
+    candidates = get_candidates_by_quality(skill_name, 'skills')
     candidates_count = len(candidates)
     return render_template('skill.html', candidates=candidates, skill_name=skill_name,
                            candidates_count=candidates_count)
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=8888)

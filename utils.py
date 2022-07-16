@@ -16,21 +16,14 @@ def get_candidate_by_id(candidate_id) -> dict:
             return candidate
 
 
-def get_candidates_by_name(candidate_name) -> list[dict]:
-    """Return candidate by id"""
+def get_candidates_by_quality(quality: str, field_to_find: str) -> list[dict]:
+    """
+    Return candidate by some quality.
+    For example quality could be the name or skills of the candidate.
+    """
     list_with_candidates = load_candidates()
     list_with_wanted_candidates = []
     for candidate in list_with_candidates:
-        if candidate_name.lower().strip() in candidate['name'].lower():
-            list_with_wanted_candidates.append(candidate)
-    return list_with_wanted_candidates
-
-
-def get_candidates_by_skill(skill_name) -> list[dict]:
-    """Return candidate by skill"""
-    list_with_candidates = load_candidates()
-    list_with_wanted_candidates = []
-    for candidate in list_with_candidates:
-        if skill_name.lower().strip() in candidate['skills'].lower():
+        if quality.lower().strip() in candidate[field_to_find].lower():
             list_with_wanted_candidates.append(candidate)
     return list_with_wanted_candidates
