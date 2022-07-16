@@ -30,5 +30,5 @@ def show_candidate_with_skill(skill_name):
     return render_template('skill.html', candidates=candidates, skill_name=skill_name,
                            candidates_count=candidates_count)
 
-
-app.run(host='127.0.0.1', port=8888)
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=8888)
