@@ -19,7 +19,7 @@ def get_candidate_by_id(candidate_id) -> dict:
 def get_candidates_by_quality(quality: str, field_to_find: str) -> list[dict]:
     """
     Return candidate by some quality.
-    For example quality could be the name or skills of the candidate.
+    For example quality could be the name or the skill of the candidate.
     """
     list_with_candidates = load_candidates()
     list_with_wanted_candidates = []
